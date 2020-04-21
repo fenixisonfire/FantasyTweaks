@@ -14,7 +14,7 @@ namespace FantasyTweaks
             var harmony = new Harmony("fantasytweaks.harmony.patch");
             harmony.PatchAll();
 
-            InformationManager.DisplayMessage(new InformationMessage(""));
+            InformationManager.DisplayMessage(new InformationMessage("Fantasy tweaks loaded."));
         }
     }
 
