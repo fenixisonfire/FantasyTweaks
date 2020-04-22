@@ -15,7 +15,7 @@ namespace FantasyTweaks
             try
             {
                 var harmony = new Harmony("fantasytweaks.harmony.patch");
-                harmony.PatchAll(Assembly.GetExecutingAssembly());
+                harmony.PatchAll();
             }
             catch (Exception ex)
             {

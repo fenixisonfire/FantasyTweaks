@@ -9,9 +9,9 @@ namespace FantasyTweaks.Patches
         [HarmonyPatch(typeof(PartyScreenLogic), "ExecuteTroop")]
         public class ExecuteTroopPatch {
 
-            public static void Postfix(PartyScreenLogic.PartyCommand cmd)
+            public static void Postfix(PartyScreenLogic.PartyCommand command)
             {
-                CharacterObject character = cmd.Character;
+                CharacterObject character = command.Character;
 
                 Equipment battleEquipment = character.HeroObject.BattleEquipment;
                 
