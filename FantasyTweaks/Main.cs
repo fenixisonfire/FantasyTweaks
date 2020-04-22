@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using HarmonyLib;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.Core;
@@ -14,7 +15,7 @@ namespace FantasyTweaks
             try
             {
                 var harmony = new Harmony("fantasytweaks.harmony.patch");
-                harmony.PatchAll();
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
             }
             catch (Exception ex)
             {

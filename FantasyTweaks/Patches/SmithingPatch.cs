@@ -4,7 +4,7 @@ using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 
 namespace FantasyTweaks.Patches
 {
-    internal class SmithingPatch
+    public class SmithingPatch
     {
         private static readonly Double SMITHING_STAMINA_MULTIPLIER = 0.25;
 

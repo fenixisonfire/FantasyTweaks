@@ -3,7 +3,7 @@ using TaleWorlds.CampaignSystem.SandBox.GameComponents;
 
 namespace FantasyTweaks.Patches
 {
-    internal class CharacterPatch
+    public class CharacterPatch
     {
         [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "get_LevelsPerAttributePoint")]
         public class GetLevelsPerAttributePointPatch

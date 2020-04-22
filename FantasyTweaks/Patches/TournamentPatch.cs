@@ -5,7 +5,7 @@ using SandBox.TournamentMissions.Missions;
 
 namespace FantasyTweaks.Patches
 {
-    internal class TournamentPatch
+    public class TournamentPatch
     {
         [HarmonyPatch(typeof(DefaultTournamentModel), "GetRenownReward")]
         public class GetRenownRewardPatch
