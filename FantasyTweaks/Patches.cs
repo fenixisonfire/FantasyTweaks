@@ -1,8 +1,8 @@
 ﻿using System;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+using SandBox.TournamentMissions.Missions;
 
 namespace FantasyTweaks
 {
@@ -13,23 +13,25 @@ namespace FantasyTweaks
         [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "get_LevelsPerAttributePoint")]
         public class GetLevelsPerAttributePointPatch
         {
-            private static void Postfix(ref int __result)
+            private static bool Prefix(ref int __result)
             {
                 __result = 1;
+                return false;
             }
         }
         
         [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "get_FocusPointsPerLevel")]
         public class GetFocusPointsPerLevelPatch
         { 
-            private static void Postfix(ref int __result)
+            private static bool Prefix(ref int __result)
             {
                 __result = 2;
+                return false;
             }
         }
 
         [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForRefining")]
-        public class GetEnergyCostForRefining
+        public class GetEnergyCostForRefiningPatch
         {
             private static void Postfix(ref int __result)
             {
@@ -38,7 +40,7 @@ namespace FantasyTweaks
         }
 
         [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForSmithing")]
-        public class GetEnergyCostForSmithing
+        public class GetEnergyCostForSmithingPatch
         {
             private static void Postfix(ref int __result)
             {
@@ -47,13 +49,32 @@ namespace FantasyTweaks
         }
 
         [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForSmelting")]
-        public class GetEnergyCostForSmelting
+        public class GetEnergyCostForSmeltingPatch
         {
             private static void Postfix(ref int __result)
             {
-                __result = (int) (SMITHING_STAMINA_MULTIPLIER * __result);
+                __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
             }
         }
+
+        [HarmonyPatch(typeof(DefaultTournamentModel), "GetRenownReward")]
+        public class GetRenownRewardPatch
+        {
+            private static void Postfix(ref int __result)
+            {
+                __result = __result * 2;
+            }
+        }
+
+        [HarmonyPatch(typeof(TournamentBehavior), "get_OverallExpectedDenars")]
+        public class GetOverallExpectedDenarsPatch
+        {
+            private static void Postfix(ref int __result)
+            {
+                __result = __result + 1000;
+            }
+        }
+
     }
 
 }

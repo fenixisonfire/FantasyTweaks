@@ -11,10 +11,18 @@ namespace FantasyTweaks
         {
             base.OnSubModuleLoad();
 
-            var harmony = new Harmony("fantasytweaks.harmony.patch");
-            harmony.PatchAll();
+            try
+            {
+                var harmony = new Harmony("fantasytweaks.harmony.patch");
+                harmony.PatchAll();
+            }
+            catch (Exception ex)
+            {
+                InformationManager.DisplayMessage(
+                    new InformationMessage($"Error occured while loading Fantasy Tweaks:\n {ex.ToString()}")
+                );
+            }
 
-            InformationManager.DisplayMessage(new InformationMessage("Fantasy tweaks loaded."));
         }
     }
 
