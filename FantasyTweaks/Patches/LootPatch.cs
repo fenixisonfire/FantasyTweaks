@@ -7,8 +7,8 @@ namespace FantasyTweaks.Patches
     public class LootPatch
     {
         [HarmonyPatch(typeof(PartyScreenLogic), "ExecuteTroop")]
-        public class ExecuteTroopPatch {
-
+        public class ExecuteTroopPatch
+        {
             public static void Postfix(PartyScreenLogic.PartyCommand command)
             {
                 CharacterObject character = command.Character;
