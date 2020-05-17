@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviours\RoyalArmoury.cs" />
     <Compile Include="Patches\CharacterPatch.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\LootPatch.cs" />
