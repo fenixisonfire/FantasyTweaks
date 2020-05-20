@@ -20,13 +20,13 @@ namespace FantasyTweaks.Patches
              * 
              * The position of the value in the array represents the tier of unit it's for, i.e 0th element for tier 0, 1st element for tier 1, etc.
             */
-            private static readonly float[] RECRUITMENT_PROBABILITY = new float[7] { 1f, 0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f };
+            private static readonly float[] _recruitmentProbability = new float[7] { 1f, 0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f };
 
             public static bool Prefix(ref float[] __result, MobileParty mainParty)
             {
                 if (mainParty.IsMainParty)
                 {
-                    __result = RECRUITMENT_PROBABILITY;
+                    __result = _recruitmentProbability;
                     return false;
                 }
                 
@@ -37,7 +37,7 @@ namespace FantasyTweaks.Patches
         [HarmonyPatch(typeof(RecruitPrisonersCampaignBehavior), "DailyTick")]
         public class DailyTickPatch
         {
-            private static readonly float CONVERSION_RATE_MIN = 0.4f;
+            private static readonly float _minConversionRate = 0.4f;
 
             private static bool Prefix(RecruitPrisonersCampaignBehavior __instance)
             {
@@ -47,7 +47,7 @@ namespace FantasyTweaks.Patches
                     CharacterObject character = prisonRoster.GetCharacterAtIndex(i);
                     int currentlyRecruitable = __instance.GetRecruitableNumber(character);
                     int totalTroopCount = prisonRoster.GetTroopCount(character);
-                    int newRecruitable = currentlyRecruitable + (int) Math.Ceiling(MBRandom.RandomFloatRanged(CONVERSION_RATE_MIN, 1.0f) * (totalTroopCount - currentlyRecruitable));
+                    int newRecruitable = currentlyRecruitable + (int) Math.Ceiling(MBRandom.RandomFloatRanged(_minConversionRate, 1.0f) * (totalTroopCount - currentlyRecruitable));
                     __instance.SetRecruitableNumber(character, newRecruitable);
                 }
 

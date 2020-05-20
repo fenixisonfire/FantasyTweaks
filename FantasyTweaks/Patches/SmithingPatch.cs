@@ -8,15 +8,15 @@ namespace FantasyTweaks.Patches
 {
     public class SmithingPatch
     {
-        private static readonly Double SMITHING_STAMINA_MULTIPLIER = 0.25;
-        private static readonly int SMITHING_STAMINA_HOURLY_REGAIN = 10;
+        private static readonly Double _smithingStaminaMultiplier = 0.25;
+        private static readonly int _smithingStaminaHourlyGain = 10;
 
         [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForRefining")]
         public class GetEnergyCostForRefiningPatch
         {
             private static void Postfix(ref int __result)
             {
-                __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
+                __result = (int)(_smithingStaminaMultiplier * __result);
             }
         }
 
@@ -25,7 +25,7 @@ namespace FantasyTweaks.Patches
         {
             private static void Postfix(ref int __result)
             {
-                __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
+                __result = (int)(_smithingStaminaMultiplier * __result);
             }
         }
 
@@ -34,7 +34,7 @@ namespace FantasyTweaks.Patches
         {
             private static void Postfix(ref int __result)
             {
-                __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
+                __result = (int)(_smithingStaminaMultiplier * __result);
             }
         }
 
@@ -50,7 +50,7 @@ namespace FantasyTweaks.Patches
                 int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
                 if (heroCraftingStamina < maxCraftingStamina)
                 {
-                    int gain = SMITHING_STAMINA_HOURLY_REGAIN;
+                    int gain = _smithingStaminaHourlyGain;
                     int fromMax = maxCraftingStamina - heroCraftingStamina;
                     if (fromMax < gain)
                     {

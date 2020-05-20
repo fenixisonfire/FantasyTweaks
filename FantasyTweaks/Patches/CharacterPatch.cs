@@ -9,8 +9,8 @@ namespace FantasyTweaks.Patches
 {
     public class CharacterPatch
     {
-        private static readonly int LEARNING_LIMIT_MULTIPLIER = 2;
-        private static readonly float LEARNING_RATE_MULTIPLIER = 3.0f;
+        private static readonly int _learningLimitMultiplier = 2;
+        private static readonly float _learningRateMultiplier = 3.0f;
 
         [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "get_LevelsPerAttributePoint")]
         public class GetLevelsPerAttributePointPatch
@@ -42,7 +42,7 @@ namespace FantasyTweaks.Patches
         {
             private static void Postfix(ref int __result)
             {
-                __result *= LEARNING_LIMIT_MULTIPLIER;
+                __result *= _learningLimitMultiplier;
             }
         }
 
@@ -57,7 +57,7 @@ namespace FantasyTweaks.Patches
         {
             private static void Postfix(ref int __result)
             {
-                __result *= LEARNING_LIMIT_MULTIPLIER;
+                __result *= _learningLimitMultiplier;
             }
         }
 
@@ -71,7 +71,7 @@ namespace FantasyTweaks.Patches
         {
             private static void Postfix(ref float __result)
             {
-                __result *= LEARNING_RATE_MULTIPLIER;
+                __result *= _learningRateMultiplier;
             }
         }
         
@@ -88,7 +88,7 @@ namespace FantasyTweaks.Patches
         {
             private static void Postfix(ref float __result)
             {
-                __result *= LEARNING_RATE_MULTIPLIER;
+                __result *= _learningRateMultiplier;
             }
         }
     }
