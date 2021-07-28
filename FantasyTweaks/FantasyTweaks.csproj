@@ -69,13 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\RoyalArmoury.cs" />
+    <Compile Include="Models\Shadowfax.cs" />
     <Compile Include="Patches\HeroPatch.cs" />
     <Compile Include="Patches\CharacterPatch.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\LootPatch.cs" />
     <Compile Include="Patches\PrisonerPatch.cs" />
     <Compile Include="Patches\SmithingPatch.cs" />
-    <Compile Include="Patches\CalculateFinalSpeedPatch.cs" />
     <Compile Include="Patches\TournamentPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

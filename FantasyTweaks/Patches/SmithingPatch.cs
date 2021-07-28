@@ -7,7 +7,7 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 namespace FantasyTweaks.Patches
 {
     [HarmonyPatch(typeof(DefaultSmithingModel))]
-    public class DefaultSmithingModelPatch
+    class DefaultSmithingModelPatch
     {
         private static readonly Double SMITHING_STAMINA_MULTIPLIER = 0.25;
 
@@ -35,7 +35,7 @@ namespace FantasyTweaks.Patches
     }
 
     [HarmonyPatch(typeof(CraftingCampaignBehavior))]
-    public class CraftingCampaignBehaviorPatch
+    class CraftingCampaignBehaviorPatch
     {
         private static readonly int SMITHING_STAMINA_HOURLY_GAIN = 5;
 

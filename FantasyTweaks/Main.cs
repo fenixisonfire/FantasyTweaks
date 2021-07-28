@@ -4,6 +4,7 @@ using TaleWorlds.MountAndBlade;
 using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
 using FantasyTweaks.Behaviours;
+using FantasyTweaks.Models;
 
 namespace FantasyTweaks
 {
@@ -34,10 +35,13 @@ namespace FantasyTweaks
 
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
+            base.OnGameStart(game, gameStarterObject);
             if (game.GameType is Campaign)
             {
                 CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;
                 campaignGameStarter.AddBehavior(new RoyalArmoury());
+
+                gameStarterObject.AddModel(new Shadowfax());
             }
         }
     }
