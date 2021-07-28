@@ -1,16 +1,11 @@
-﻿using System;
-using HarmonyLib;
-using TaleWorlds.Core;
-using TaleWorlds.CampaignSystem;
+﻿using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
-using TaleWorlds.Localization;
 
 namespace FantasyTweaks.Patches
 {
     public class CharacterPatch
     {
-        private static readonly int _learningLimitMultiplier = 2;
-        private static readonly float _learningRateMultiplier = 3.0f;
+        private static readonly int LEARNING_RATE_LIMIT_MULTIPLIER = 2;
 
         [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "get_LevelsPerAttributePoint")]
         public class GetLevelsPerAttributePointPatch
@@ -32,63 +27,12 @@ namespace FantasyTweaks.Patches
             }
         }
 
-        [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "CalculateLearningLimit", new Type[] 
-        {
-            typeof(Hero),
-            typeof(SkillObject),
-            typeof(StatExplainer)
-        })]
+        [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "CalculateLearningLimit")]
         public class CalculateLearningLimitHeroPatch
         {
             private static void Postfix(ref int __result)
             {
-                __result *= _learningLimitMultiplier;
-            }
-        }
-
-        [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "CalculateLearningLimit", new Type[] 
-        {
-            typeof(int),
-            typeof(int),
-            typeof(TextObject),
-            typeof(StatExplainer)
-        })]
-        public class CalculateLearningPatch
-        {
-            private static void Postfix(ref int __result)
-            {
-                __result *= _learningLimitMultiplier;
-            }
-        }
-
-        [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "CalculateLearningRate", new Type[]
-        {
-            typeof(Hero),
-            typeof(SkillObject),
-            typeof(StatExplainer)
-        })]
-        public class CalculateLearningRateHeroPatch
-        {
-            private static void Postfix(ref float __result)
-            {
-                __result *= _learningRateMultiplier;
-            }
-        }
-        
-        [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel), "CalculateLearningRate", new Type[]
-        {
-            typeof(int),
-            typeof(int),
-            typeof(int),
-            typeof(int),
-            typeof(TextObject),
-            typeof(StatExplainer),
-        })]
-        public class CalculateLearningRatePatch
-        {
-            private static void Postfix(ref float __result)
-            {
-                __result *= _learningRateMultiplier;
+                __result *= LEARNING_RATE_LIMIT_MULTIPLIER;
             }
         }
     }

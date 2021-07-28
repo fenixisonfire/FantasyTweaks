@@ -3,6 +3,7 @@ using HarmonyLib;
 using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.SandBox.GameComponents;
 
 namespace FantasyTweaks.Patches
 {
@@ -29,31 +30,28 @@ namespace FantasyTweaks.Patches
                     __result = _recruitmentProbability;
                     return false;
                 }
-                
+
                 return true;
             }
         }
 
-        [HarmonyPatch(typeof(RecruitPrisonersCampaignBehavior), "DailyTick")]
-        public class DailyTickPatch
+        [HarmonyPatch(typeof(DefaultPrisonerRecruitmentCalculationModel), "CalculateRecruitableNumber")]
+        public class CalculateRecruitableNumberPatch
         {
-            private static readonly float _minConversionRate = 0.4f;
-
-            private static bool Prefix(RecruitPrisonersCampaignBehavior __instance)
+            private static bool Prefix(ref int __result, PartyBase party, CharacterObject character)
             {
-                TroopRoster prisonRoster = MobileParty.MainParty.PrisonRoster;
-                for (int i = 0; i < prisonRoster.Count; i++)
+                if (party.MobileParty.IsMainParty)
                 {
-                    CharacterObject character = prisonRoster.GetCharacterAtIndex(i);
-                    int currentlyRecruitable = __instance.GetRecruitableNumber(character);
-                    int totalTroopCount = prisonRoster.GetTroopCount(character);
-                    int newRecruitable = currentlyRecruitable + (int) Math.Ceiling(MBRandom.RandomFloatRanged(_minConversionRate, 1.0f) * (totalTroopCount - currentlyRecruitable));
-                    __instance.SetRecruitableNumber(character, newRecruitable);
+                    if (character.IsHero || party.PrisonRoster.Count == 0 || party.PrisonRoster.TotalRegulars <= 0)
+                    {
+                        return true;
+                    }
+                    __result = party.PrisonRoster.GetElementNumber(character);
+                    return false;
                 }
 
-                return false;
+                return true;
             }
         }
-       
     }
 }

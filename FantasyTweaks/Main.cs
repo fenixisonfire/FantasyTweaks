@@ -29,7 +29,7 @@ namespace FantasyTweaks
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
-            InformationManager.DisplayMessage(new InformationMessage("Fantasy Tweaks"));
+            InformationManager.DisplayMessage(new InformationMessage("Fantasy Tweaks 1.6"));
         }
 
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)

@@ -170,7 +170,7 @@ namespace FantasyTweaks.Behaviours
             {
                 items.ForEach(item =>
                 {
-                    itemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>(item), RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT), true);
+                    itemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>(item), RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT));
                 });
             }
             InventoryManager.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryManager.InventoryCategoryType.None, null);

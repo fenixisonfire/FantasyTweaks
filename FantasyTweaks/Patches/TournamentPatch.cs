@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
+using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using SandBox.TournamentMissions.Missions;
 
 namespace FantasyTweaks.Patches
@@ -18,7 +19,7 @@ namespace FantasyTweaks.Patches
             }
         }
 
-        [HarmonyPatch(typeof(TournamentBehavior), "OnPlayerWinTournament")]
+        [HarmonyPatch(typeof(TournamentManager), "OnPlayerWinTournament")]
         public class OnPlayWinTournamentPatch
         {
             private static bool Prefix(TournamentBehavior __instance)
