@@ -86,8 +86,7 @@ namespace FantasyTweaks.Behaviours
             "decorated_imperial_boots",
             "half_scale_barding",
             "imperial_scale_barding",
-            "arrow_emp_1_a",
-            "tall_heater_shield" 
+            "arrow_emp_1_a"
         };
 
         private static readonly List<string> KHUZAIT_ITEMS = new List<string>() 
@@ -261,10 +260,11 @@ namespace FantasyTweaks.Behaviours
             int itemSelectionCount = RANDOM.Next(MIN_ITEM_SELECTION_COUNT, MAX_ITEM_SELECTION_COUNT);
             for (int i = 0; i < itemSelectionCount; i++)
             {
-                itemRoster.AddToCounts(
-                    MBObjectManager.Instance.GetObject<ItemObject>(items.GetRandomElement()), 
-                    RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT)
-                );
+                ItemObject item = MBObjectManager.Instance.GetObject<ItemObject>(items.GetRandomElement());
+                if (item != null)
+                {
+                    itemRoster.AddToCounts(item, RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT));
+                }
             }
 
             InventoryManager.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryManager.InventoryCategoryType.None, null);
