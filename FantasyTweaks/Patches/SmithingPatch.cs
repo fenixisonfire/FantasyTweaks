@@ -6,64 +6,61 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 
 namespace FantasyTweaks.Patches
 {
-    public class SmithingPatch
+    [HarmonyPatch(typeof(DefaultSmithingModel))]
+    public class DefaultSmithingModelPatch
     {
-        private static readonly Double _smithingStaminaMultiplier = 0.25;
-        private static readonly int _smithingStaminaHourlyGain = 10;
+        private static readonly Double SMITHING_STAMINA_MULTIPLIER = 0.25;
 
-        [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForRefining")]
-        public class GetEnergyCostForRefiningPatch
+        [HarmonyPostfix]
+        [HarmonyPatch("GetEnergyCostForRefining")]
+        static void GetEnergyCostForRefiningPostfix(ref int __result)
         {
-            private static void Postfix(ref int __result)
-            {
-                __result = (int)(_smithingStaminaMultiplier * __result);
-            }
+            __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
         }
 
-        [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForSmithing")]
-        public class GetEnergyCostForSmithingPatch
+        [HarmonyPostfix]
+        [HarmonyPatch("GetEnergyCostForSmithing")]
+        static void GetEnergyCostForSmithingPostfix(ref int __result)
         {
-            private static void Postfix(ref int __result)
-            {
-                __result = (int)(_smithingStaminaMultiplier * __result);
-            }
+            __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
         }
 
-        [HarmonyPatch(typeof(DefaultSmithingModel), "GetEnergyCostForSmelting")]
-        public class GetEnergyCostForSmeltingPatch
+
+        [HarmonyPostfix]
+        [HarmonyPatch("GetEnergyCostForSmelting")]
+        static void GetEnergyCostForSmeltingPostfix(ref int __result)
         {
-            private static void Postfix(ref int __result)
-            {
-                __result = (int)(_smithingStaminaMultiplier * __result);
-            }
+            __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
         }
+    }
 
-        [HarmonyPatch(typeof(CraftingCampaignBehavior), "HourlyTick")]
-        public class HourlyTickPatch
+    [HarmonyPatch(typeof(CraftingCampaignBehavior))]
+    public class CraftingCampaignBehaviorPatch
+    {
+        private static readonly int SMITHING_STAMINA_HOURLY_GAIN = 5;
+
+        [HarmonyPrefix]
+        [HarmonyPatch("HourlyTick")]
+        static bool HourlyTickPrefix(CraftingCampaignBehavior __instance)
         {
+            Hero hero = PartyBase.MainParty.LeaderHero;
 
-            private static bool Prefix(CraftingCampaignBehavior __instance)
+            int heroCraftingStamina = __instance.GetHeroCraftingStamina(hero);
+            int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
+            if (heroCraftingStamina < maxCraftingStamina)
             {
-                Hero hero = PartyBase.MainParty.LeaderHero;
-
-                int heroCraftingStamina = __instance.GetHeroCraftingStamina(hero);
-                int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
-                if (heroCraftingStamina < maxCraftingStamina)
+                int gain = SMITHING_STAMINA_HOURLY_GAIN;
+                int fromMax = maxCraftingStamina - heroCraftingStamina;
+                if (fromMax < gain)
                 {
-                    int gain = _smithingStaminaHourlyGain;
-                    int fromMax = maxCraftingStamina - heroCraftingStamina;
-                    if (fromMax < gain)
-                    {
-                        gain = fromMax;
-                    }
-                    
-                    __instance.SetHeroCraftingStamina(hero, Math.Min(maxCraftingStamina, heroCraftingStamina + gain));
-
+                    gain = fromMax;
                 }
 
-                return false;
-            }
-        }
+                __instance.SetHeroCraftingStamina(hero, Math.Min(maxCraftingStamina, heroCraftingStamina + gain));
 
+            }
+
+            return true;
+        }
     }
 }
