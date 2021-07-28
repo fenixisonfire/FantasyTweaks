@@ -9,7 +9,7 @@ namespace FantasyTweaks.Behaviours
 {
     class RoyalArmoury : CampaignBehaviorBase
     {
-        private static readonly String TOWN_KEEP_MENU_ID = "town_keep";
+        private static readonly string TOWN_KEEP_MENU_ID = "town_keep";
         private static readonly int INDEX = 99;
 
         private static Random RANDOM = new Random();
@@ -76,7 +76,8 @@ namespace FantasyTweaks.Behaviours
                                                                                 "decorated_imperial_boots",
                                                                                 "half_scale_barding",
                                                                                 "imperial_scale_barding",
-                                                                                "arrow_emp_1_a" };
+                                                                                "arrow_emp_1_a",
+                                                                                "tall_heater_shield" };
 
         private static readonly List<string> KHUZAIT_ITEMS = new List<string>() {"khuzait_noble_helmet_with_neckguard",
                                                                                  "spiked_helmet_with_facemask",
