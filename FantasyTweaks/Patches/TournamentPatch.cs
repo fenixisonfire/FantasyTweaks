@@ -1,32 +1,31 @@
 ﻿using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
-using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using SandBox.TournamentMissions.Missions;
 
 namespace FantasyTweaks.Patches
 {
-    public class TournamentPatch
+
+    [HarmonyPatch(typeof(DefaultTournamentModel), "GetRenownReward")]
+    public class DefaultTournamentModelPatch
     {
-        private static readonly int _tournamentRenownMultiplier = 2;
-        private static readonly int _tournamentWinReward = 1000;
+        private static readonly int TOURNAMENT_RENOWN_MULTIPLIER = 2;
 
-        [HarmonyPatch(typeof(DefaultTournamentModel), "GetRenownReward")]
-        public class GetRenownRewardPatch
+        static bool Prefix(ref int __result)
         {
-            private static void Postfix(ref int __result)
-            {
-                __result *= _tournamentRenownMultiplier;
-            }
+            __result *= TOURNAMENT_RENOWN_MULTIPLIER;
+            return false;
         }
+    }
 
-        [HarmonyPatch(typeof(TournamentManager), "OnPlayerWinTournament")]
-        public class OnPlayWinTournamentPatch
+    [HarmonyPatch(typeof(TournamentBehavior), "OnPlayerWinTournament")]
+    public class OnPlayerWinTournamentPatch
+    {
+        private static readonly int TOURNAMENT_WIN_AWARD = 1000;
+
+        static bool Prefix(TournamentBehavior __instance)
         {
-            private static bool Prefix(TournamentBehavior __instance)
-            {
-                typeof(TournamentBehavior).GetProperty("OverallExpectedDenars").SetValue(__instance, __instance.OverallExpectedDenars + _tournamentWinReward);
-                return true;
-            }
+            typeof(TournamentBehavior).GetProperty("OverallExpectedDenars").SetValue(__instance, __instance.OverallExpectedDenars + TOURNAMENT_WIN_AWARD);
+            return true;
         }
     }
 }

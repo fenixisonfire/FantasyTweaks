@@ -11,7 +11,6 @@ namespace FantasyTweaks.Patches
         [HarmonyPatch(typeof(Hero))]
         public class Patches
         {
-            [HarmonyPrefix]
             [HarmonyPatch("AddSkillXp")]
             public static void Prefix(Hero __instance, SkillObject skill, ref float xpAmount)
             {
