@@ -17,6 +17,8 @@ namespace FantasyTweaks
             try
             {
                 var harmony = new Harmony("fantasytweaks.harmony.patch");
+
+                // Harmony.DEBUG = true;
                 harmony.PatchAll();
             }
             catch (Exception ex)

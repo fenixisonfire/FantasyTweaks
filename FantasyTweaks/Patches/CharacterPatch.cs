@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
 
 namespace FantasyTweaks.Patches
@@ -7,7 +8,7 @@ namespace FantasyTweaks.Patches
     [HarmonyPatch(typeof(DefaultCharacterDevelopmentModel))]
     public class DefaultCharacterDevelopmentModelPatch
     {
-        private static readonly int LEARNING_RATE_LIMIT_MULTIPLIER = 2;
+        private static readonly float LEARNING_RATE_LIMIT_MULTIPLIER = 1.005f;
 
         [HarmonyPrefix]
         [HarmonyPatch("get_LevelsPerAttributePoint")]
@@ -27,9 +28,11 @@ namespace FantasyTweaks.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("CalculateLearningLimit")]
-        static void CalculateLearningLimitPostfix(ref int __result)
+        static void CalculateLearningLimitPostfix(ref ExplainedNumber __result)
         {
-            __result *= LEARNING_RATE_LIMIT_MULTIPLIER;
+            float newLearningLimit = __result.ResultNumber * LEARNING_RATE_LIMIT_MULTIPLIER - __result.ResultNumber;
+            __result.AddFactor(newLearningLimit);
+            __result.LimitMax(500);
         }
     }
 }

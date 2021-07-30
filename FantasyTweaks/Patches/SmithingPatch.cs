@@ -1,8 +1,8 @@
 ﻿using System;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 
 namespace FantasyTweaks.Patches
 {
@@ -34,31 +34,20 @@ namespace FantasyTweaks.Patches
         }
     }
 
-    [HarmonyPatch(typeof(CraftingCampaignBehavior))]
-    class CraftingCampaignBehaviorPatch
+    [HarmonyPatch(typeof(CraftingCampaignBehavior), "HourlyTick")]
+    public class HourlyTickPatch
     {
-        private static readonly int SMITHING_STAMINA_HOURLY_GAIN = 5;
-
-        [HarmonyPrefix]
-        [HarmonyPatch("HourlyTick")]
-        static bool HourlyTickPrefix(CraftingCampaignBehavior __instance)
+        static bool Prefix(CraftingCampaignBehavior __instance)
         {
             Hero hero = PartyBase.MainParty.LeaderHero;
 
             int heroCraftingStamina = __instance.GetHeroCraftingStamina(hero);
             int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
-            if (heroCraftingStamina < maxCraftingStamina)
-            {
-                int gain = SMITHING_STAMINA_HOURLY_GAIN;
-                int fromMax = maxCraftingStamina - heroCraftingStamina;
-                if (fromMax < gain)
-                {
-                    gain = fromMax;
-                }
+            int gain = 50;
 
-                __instance.SetHeroCraftingStamina(hero, Math.Min(maxCraftingStamina, heroCraftingStamina + gain));
+            int newStamina = Math.Min(maxCraftingStamina, heroCraftingStamina + gain);
 
-            }
+            __instance.SetHeroCraftingStamina(hero, newStamina);
 
             return true;
         }
