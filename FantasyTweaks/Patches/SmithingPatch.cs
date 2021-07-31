@@ -10,6 +10,7 @@ namespace FantasyTweaks.Patches
     class DefaultSmithingModelPatch
     {
         private static readonly Double SMITHING_STAMINA_MULTIPLIER = 0.25;
+        private static readonly int RESEARCH_RATE_MULTIPLIER = 50;
 
         [HarmonyPostfix]
         [HarmonyPatch("GetEnergyCostForRefining")]
@@ -31,6 +32,13 @@ namespace FantasyTweaks.Patches
         static void GetEnergyCostForSmeltingPostfix(ref int __result)
         {
             __result = (int)(SMITHING_STAMINA_MULTIPLIER * __result);
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch("ResearchPointsNeedForNewPart")]
+        static void ResearchPointsNeedForNewPartPatch(int count, ref int __result)
+        {
+            __result = __result / RESEARCH_RATE_MULTIPLIER;
         }
     }
 
