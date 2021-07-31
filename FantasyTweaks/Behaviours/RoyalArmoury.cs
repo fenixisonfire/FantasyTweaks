@@ -253,17 +253,21 @@ namespace FantasyTweaks.Behaviours
             ItemRoster itemRoster = new ItemRoster();
             string culture = Settlement.CurrentSettlement.Culture.StringId;
 
-            List<string> items = new List<string>();
-            CULTURE_TO_ITEMS_DICT.TryGetValue(culture, out items);
-            items.AddRange(SWADIAN_ITEMS);
+            List<string> cultureItems = new List<string>();
+            CULTURE_TO_ITEMS_DICT.TryGetValue(culture, out cultureItems);
 
             int itemSelectionCount = RANDOM.Next(MIN_ITEM_SELECTION_COUNT, MAX_ITEM_SELECTION_COUNT);
             for (int i = 0; i < itemSelectionCount; i++)
             {
-                ItemObject item = MBObjectManager.Instance.GetObject<ItemObject>(items.GetRandomElement());
-                if (item != null)
+                ItemObject cultureItem = MBObjectManager.Instance.GetObject<ItemObject>(cultureItems.GetRandomElement());
+                if (cultureItem != null)
                 {
-                    itemRoster.AddToCounts(item, RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT));
+                    itemRoster.AddToCounts(cultureItem, RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT));
+                }
+                ItemObject swadianItem = MBObjectManager.Instance.GetObject<ItemObject>(SWADIAN_ITEMS.GetRandomElement());
+                if (swadianItem != null)
+                {
+                    itemRoster.AddToCounts(swadianItem, RANDOM.Next(MIN_ITEM_COUNT, MAX_ITEM_COUNT));
                 }
             }
 
