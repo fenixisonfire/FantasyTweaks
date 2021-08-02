@@ -45,15 +45,16 @@ namespace FantasyTweaks.Patches
     [HarmonyPatch(typeof(CraftingCampaignBehavior), "HourlyTick")]
     public class HourlyTickPatch
     {
+        private static readonly int SMITHING_STAMINA_GAIN = 50;
+
         static bool Prefix(CraftingCampaignBehavior __instance)
         {
             Hero hero = PartyBase.MainParty.LeaderHero;
 
             int heroCraftingStamina = __instance.GetHeroCraftingStamina(hero);
             int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
-            int gain = 50;
 
-            int newStamina = Math.Min(maxCraftingStamina, heroCraftingStamina + gain);
+            int newStamina = Math.Min(maxCraftingStamina, heroCraftingStamina + SMITHING_STAMINA_GAIN);
 
             __instance.SetHeroCraftingStamina(hero, newStamina);
 
