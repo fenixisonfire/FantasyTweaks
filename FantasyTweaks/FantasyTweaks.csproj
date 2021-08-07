@@ -148,6 +148,7 @@
     <Compile Include="Behaviours\StoneOfRenewal.cs" />
     <Compile Include="Behaviours\RoyalArmoury.cs" />
     <Compile Include="Models\Shadowfax.cs" />
+    <Compile Include="Patches\DefaultItemDiscardModelPatch.cs" />
     <Compile Include="Patches\HeroPatch.cs" />
     <Compile Include="Patches\CharacterPatch.cs" />
     <Compile Include="Main.cs" />
