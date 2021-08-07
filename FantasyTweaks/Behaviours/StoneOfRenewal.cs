@@ -41,6 +41,22 @@ namespace FantasyTweaks.Behaviours
 
         private void RespecOnConsequence(MenuCallbackArgs args)
         {
+            InformationManager.ShowInquiry(
+                new InquiryData(
+                    "Stone of Renewal",
+                    "Touching the stone of renewal clears one's mind of previously learnt perks. Are you sure you wish to continue?",
+                    true,
+                    true,
+                    "Yes",
+                    "No",
+                    new Action(RespecMainHero),
+                    null
+                )
+            );
+        }
+
+        private void RespecMainHero()
+        {
             RespecHero(Hero.MainHero);
         }
 
@@ -48,17 +64,17 @@ namespace FantasyTweaks.Behaviours
         {
             if (hero.GetPerkValue(DefaultPerks.Crafting.VigorousSmith))
             {
-                setAttributeValue(hero, DefaultCharacterAttributes.Vigor, hero.GetAttributeValue(DefaultCharacterAttributes.Vigor) - 1);
+                SetAttributeValue(hero, DefaultCharacterAttributes.Vigor, hero.GetAttributeValue(DefaultCharacterAttributes.Vigor) - 1);
             }
 
             if (hero.GetPerkValue(DefaultPerks.Crafting.StrongSmith))
             {
-                setAttributeValue(hero, DefaultCharacterAttributes.Control, hero.GetAttributeValue(DefaultCharacterAttributes.Control) - 1);
+                SetAttributeValue(hero, DefaultCharacterAttributes.Control, hero.GetAttributeValue(DefaultCharacterAttributes.Control) - 1);
             }
 
             if (hero.GetPerkValue(DefaultPerks.Crafting.EnduringSmith))
             {
-                setAttributeValue(hero, DefaultCharacterAttributes.Endurance, hero.GetAttributeValue(DefaultCharacterAttributes.Endurance) - 1);
+                SetAttributeValue(hero, DefaultCharacterAttributes.Endurance, hero.GetAttributeValue(DefaultCharacterAttributes.Endurance) - 1);
             }
 
             if (hero.GetPerkValue(DefaultPerks.Crafting.WeaponMasterSmith))
@@ -68,14 +84,14 @@ namespace FantasyTweaks.Behaviours
             }
 
             hero.ClearPerks();
-            InformationManager.DisplayMessage(new InformationMessage("You feel as if you could begin anew."));
+            InformationManager.DisplayMessage(new InformationMessage(hero.Name + " has touched the Stone of Renewal. They shall begin anew."));
         }
 
         public override void SyncData(IDataStore dataStore)
         {
         }
 
-        private static void setAttributeValue(Hero hero, CharacterAttribute characterAttribute, int value)
+        private static void SetAttributeValue(Hero hero, CharacterAttribute characterAttribute, int value)
         {
             object[] parameters = new object[]
             {
