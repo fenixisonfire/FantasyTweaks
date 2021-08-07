@@ -145,6 +145,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviours\StoneOfRenewal.cs" />
     <Compile Include="Behaviours\RoyalArmoury.cs" />
     <Compile Include="Models\Shadowfax.cs" />
     <Compile Include="Patches\HeroPatch.cs" />

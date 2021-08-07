@@ -7,10 +7,13 @@ using TaleWorlds.ObjectSystem;
 
 namespace FantasyTweaks.Behaviours
 {
+
+    /**
+     * New shop added to keeps that stocks high end items.
+     */
     class RoyalArmoury : CampaignBehaviorBase
     {
         private static readonly string TOWN_KEEP_MENU_ID = "town_keep";
-        private static readonly int INDEX = 99;
 
         private static Random RANDOM = new Random();
         private static readonly int MIN_ITEM_SELECTION_COUNT = 10;
@@ -239,7 +242,16 @@ namespace FantasyTweaks.Behaviours
 
         private void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
         {
-            campaignGameStarter.AddGameMenuOption(TOWN_KEEP_MENU_ID, "armoury", "Access the Armoury", new GameMenuOption.OnConditionDelegate(this.AccessOnCondition), new GameMenuOption.OnConsequenceDelegate(this.ArmouryOnConsequence), false, INDEX, false);
+            campaignGameStarter.AddGameMenuOption(
+                TOWN_KEEP_MENU_ID, 
+                "armoury", 
+                "Access the Armoury", 
+                new GameMenuOption.OnConditionDelegate(this.AccessOnCondition), 
+                new GameMenuOption.OnConsequenceDelegate(this.ArmouryOnConsequence), 
+                false, 
+                -1, 
+                false
+            );
         }
 
         private bool AccessOnCondition(MenuCallbackArgs args)

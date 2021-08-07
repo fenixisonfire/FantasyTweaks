@@ -24,7 +24,7 @@ namespace FantasyTweaks
             catch (Exception ex)
             {
                 InformationManager.DisplayMessage(
-                    new InformationMessage($"Error occured while loading Fantasy Tweaks:\n {ex.ToString()}")
+                    new InformationMessage($"Error occured while loading Fantasy Tweaks:\n {ex}")
                 );
             }
         }
@@ -42,6 +42,7 @@ namespace FantasyTweaks
             {
                 CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;
                 campaignGameStarter.AddBehavior(new RoyalArmoury());
+                campaignGameStarter.AddBehavior(new StoneOfRenewal());
 
                 gameStarterObject.AddModel(new Shadowfax());
             }
