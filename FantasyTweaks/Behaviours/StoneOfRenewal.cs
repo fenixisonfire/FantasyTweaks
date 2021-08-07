@@ -77,6 +77,21 @@ namespace FantasyTweaks.Behaviours
                 SetAttributeValue(hero, DefaultCharacterAttributes.Endurance, hero.GetAttributeValue(DefaultCharacterAttributes.Endurance) - 1);
             }
 
+            if (hero.GetPerkValue(DefaultPerks.Athletics.HealthyCitizens))
+            {
+                SetAttributeValue(hero, DefaultCharacterAttributes.Endurance, hero.GetAttributeValue(DefaultCharacterAttributes.Endurance) - 1);
+            }
+
+            if (hero.GetPerkValue(DefaultPerks.Athletics.Steady))
+            {
+                SetAttributeValue(hero, DefaultCharacterAttributes.Control, hero.GetAttributeValue(DefaultCharacterAttributes.Control) - 1);
+            }
+
+            if (hero.GetPerkValue(DefaultPerks.Athletics.Strong))
+            {
+                SetAttributeValue(hero, DefaultCharacterAttributes.Vigor, hero.GetAttributeValue(DefaultCharacterAttributes.Vigor) - 1);
+            }
+
             if (hero.GetPerkValue(DefaultPerks.Crafting.WeaponMasterSmith))
             {
                 hero.HeroDeveloper.AddFocus(DefaultSkills.OneHanded, -1, false);
