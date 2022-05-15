@@ -1,7 +1,8 @@
 ﻿using HarmonyLib;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents;
-using SandBox.TournamentMissions.Missions;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
 
 namespace FantasyTweaks.Patches
@@ -20,16 +21,16 @@ namespace FantasyTweaks.Patches
         }
     }
 
-    [HarmonyPatch(typeof(TournamentBehavior))]
+    [HarmonyPatch(typeof(TournamentManager))]
     public class TournamentBehaviorPatch
     {
         private static readonly int TOURNAMENT_WIN_AWARD = 1000;
 
         [HarmonyPrefix]
         [HarmonyPatch("OnPlayerWinTournament")]
-        static bool OnPlayerWinTournamentPatchPrefix(TournamentBehavior __instance)
+        static bool OnPlayerWinTournamentPatchPrefix(TournamentManager __instance)
         {
-            typeof(TournamentBehavior).GetProperty("OverallExpectedDenars").SetValue(__instance, __instance.OverallExpectedDenars + TOURNAMENT_WIN_AWARD);
+            Hero.MainHero.ChangeHeroGold(TOURNAMENT_WIN_AWARD);
             InformationManager.DisplayMessage(new InformationMessage("Congratulations on your winnings!"));
             return true;
         }

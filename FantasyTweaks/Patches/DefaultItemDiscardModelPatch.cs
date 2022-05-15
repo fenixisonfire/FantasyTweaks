@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents;
+using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.Core;
 
 namespace FantasyTweaks.Patches

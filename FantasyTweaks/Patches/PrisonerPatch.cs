@@ -1,7 +1,8 @@
 ﻿using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents;
+using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.Party;
 
 namespace FantasyTweaks.Patches
 {
@@ -16,7 +17,7 @@ namespace FantasyTweaks.Patches
         {
             if (party.LeaderHero == Hero.MainHero)
             {
-                __result = MBMath.Round(__result * CONFORMITY_MULTIPLIER);
+                __result = MathF.Round(__result * CONFORMITY_MULTIPLIER);
             }
         }
     }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace FantasyTweaks.Behaviours
 {

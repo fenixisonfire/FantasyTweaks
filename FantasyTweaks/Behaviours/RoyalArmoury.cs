@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
+using TaleWorlds.CampaignSystem.Inventory;
+using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
 
@@ -15,7 +18,7 @@ namespace FantasyTweaks.Behaviours
     {
         private static readonly string TOWN_KEEP_MENU_ID = "town_keep";
 
-        private static Random RANDOM = new Random();
+        private static readonly Random RANDOM = new Random();
         private static readonly int MIN_ITEM_SELECTION_COUNT = 10;
         private static readonly int MAX_ITEM_SELECTION_COUNT = 31;
         private static readonly int MIN_ITEM_COUNT = 1;
