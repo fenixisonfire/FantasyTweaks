@@ -52,13 +52,15 @@ namespace FantasyTweaks.Patches
         {
             Hero hero = PartyBase.MainParty.LeaderHero;
 
-            int heroCraftingStamina = __instance.GetHeroCraftingStamina(hero);
-            int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
+            if (hero != null)
+            {
+                int heroCraftingStamina = __instance.GetHeroCraftingStamina(hero);
+                int maxCraftingStamina = __instance.GetMaxHeroCraftingStamina(hero);
 
-            int newStamina = Math.Min(maxCraftingStamina, heroCraftingStamina + SMITHING_STAMINA_GAIN);
+                int newStamina = Math.Min(maxCraftingStamina, heroCraftingStamina + SMITHING_STAMINA_GAIN);
 
-            __instance.SetHeroCraftingStamina(hero, newStamina);
-
+                __instance.SetHeroCraftingStamina(hero, newStamina);
+            }
             return true;
         }
     }
