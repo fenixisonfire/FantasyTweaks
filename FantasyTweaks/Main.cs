@@ -5,6 +5,7 @@ using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
 using FantasyTweaks.Behaviours;
 using FantasyTweaks.Models;
+using TaleWorlds.Library;
 
 namespace FantasyTweaks
 {

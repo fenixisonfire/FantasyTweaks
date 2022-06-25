@@ -2,6 +2,7 @@
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace FantasyTweaks.Patches
 {
