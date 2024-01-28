@@ -4,4 +4,4 @@
 A collection of tweaks for Mount & Blade: Bannerlord.
 
 ## Notes
-Updated for 1.6.0.
+Updated for 1.2.8.
