@@ -79,11 +79,6 @@ namespace FantasyTweaks.Behaviours
                 SetAttributeValue(hero, DefaultCharacterAttributes.Endurance, hero.GetAttributeValue(DefaultCharacterAttributes.Endurance) - 1);
             }
 
-            if (hero.GetPerkValue(DefaultPerks.Athletics.HealthyCitizens))
-            {
-                SetAttributeValue(hero, DefaultCharacterAttributes.Endurance, hero.GetAttributeValue(DefaultCharacterAttributes.Endurance) - 1);
-            }
-
             if (hero.GetPerkValue(DefaultPerks.Athletics.Steady))
             {
                 SetAttributeValue(hero, DefaultCharacterAttributes.Control, hero.GetAttributeValue(DefaultCharacterAttributes.Control) - 1);
