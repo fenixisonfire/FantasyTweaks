@@ -12,7 +12,7 @@ namespace FantasyTweaks.Patches
     [HarmonyPatch(typeof(DefaultPartySizeLimitModel), "GetPartyMemberSizeLimit")]
     internal class PartySizePatch
     {
-
+        private static readonly int _ultimateLeaderSkillCutOff = 250;
         private static readonly TextObject _textCustodianGuard = new TextObject("{=SBIh8N1p}Custodian Guard");
         
         public static void Postfix(PartyBase party, bool includeDescriptions, ref ExplainedNumber __result)
@@ -27,8 +27,8 @@ namespace FantasyTweaks.Patches
             int leadershipSkill = hero.GetSkillValue(DefaultSkills.Leadership);
             if (hasUltimateLeaderPerk)
             {
-                int bonus = Math.Max(leadershipSkill - 250, 0);
-                __result.AddFactor(bonus, _textCustodianGuard);
+                int bonus = Math.Max(leadershipSkill - _ultimateLeaderSkillCutOff, 0);
+                __result.Add(bonus, _textCustodianGuard);
             }
         }
     }
