@@ -6,7 +6,7 @@ namespace FantasyTweaks.Patches
 {
 
     [HarmonyPatch(typeof(DefaultDifficultyModel), "GetPersuasionBonusChance")]
-    internal class SilverTongue
+    internal class PersuasionPatch
     {
         static void Postfix(ref float __result)
         {
