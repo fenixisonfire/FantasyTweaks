@@ -9,7 +9,7 @@ namespace FantasyTweaks.Patches
     {
         static void Postfix(ref float __result)
         {
-            __result = 0.8f;
+            __result = 2.0f;
         }
     }
 }
