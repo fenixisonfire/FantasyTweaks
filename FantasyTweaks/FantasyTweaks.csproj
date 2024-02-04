@@ -217,8 +217,9 @@
     <Compile Include="Patches\CharacterPatch.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\LootPatch.cs" />
+    <Compile Include="Patches\PartyPatch.cs" />
     <Compile Include="Patches\PrisonerPatch.cs" />
-    <Compile Include="Patches\SilverTongue.cs" />
+    <Compile Include="Patches\PersuasionPatch.cs" />
     <Compile Include="Patches\SmithingPatch.cs" />
     <Compile Include="Patches\TournamentPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
