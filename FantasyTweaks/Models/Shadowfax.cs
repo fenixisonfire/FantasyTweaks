@@ -7,7 +7,7 @@ namespace FantasyTweaks.Models
 {
     public class Shadowfax : DefaultPartySpeedCalculatingModel
     {
-        private static readonly float SHADOWFAX_MOVEMENT_BONUS = 1.0f;
+        private static readonly float SHADOWFAX_MOVEMENT_BONUS = 2.0f;
         private static readonly TextObject _textShadowFax = new TextObject("{=1rOKUMTM}Shadowfax");
 
         public override ExplainedNumber CalculateFinalSpeed(MobileParty mobileParty, ExplainedNumber finalSpeed)
