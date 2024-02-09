@@ -48,7 +48,7 @@ namespace FantasyTweaks.Behaviours
                 settlementClaimantDecision.Settlement.Town.IsOwnerUnassigned = false;
                 kingdom.RemoveDecision(decision);
                 InformationManager.DisplayMessage(
-                    new InformationMessage($"{kingdom.GetName()} has claimed {settlementname} through Aristocratic Ownership.")
+                    new InformationMessage($"{Hero.MainHero.Clan.Name} has claimed {settlementname} through Aristocratic Ownership.")
                 );
             }
         }
