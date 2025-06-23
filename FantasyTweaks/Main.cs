@@ -41,12 +41,12 @@ namespace FantasyTweaks
             base.OnGameStart(game, gameStarterObject);
             if (game.GameType is Campaign)
             {
-                CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;
-                campaignGameStarter.AddBehavior(new RoyalArmoury());
-                campaignGameStarter.AddBehavior(new StoneOfRenewal());
-                campaignGameStarter.AddBehavior(new AristocraticOwnership());
+                // CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;
+                // campaignGameStarter.AddBehavior(new RoyalArmoury());
+                // campaignGameStarter.AddBehavior(new StoneOfRenewal());
+                // campaignGameStarter.AddBehavior(new AristocraticOwnership());
 
-                gameStarterObject.AddModel(new Shadowfax());
+                gameStarterObject.AddModel(new Fleetfooted());
             }
         }
     }

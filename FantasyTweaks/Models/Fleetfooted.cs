@@ -5,10 +5,10 @@ using TaleWorlds.Localization;
 
 namespace FantasyTweaks.Models
 {
-    public class Shadowfax : DefaultPartySpeedCalculatingModel
+    public class Fleetfooted : DefaultPartySpeedCalculatingModel
     {
-        private static readonly float SHADOWFAX_MOVEMENT_BONUS = 2.0f;
-        private static readonly TextObject _textShadowFax = new TextObject("{=1rOKUMTM}Shadowfax");
+        private static readonly float FLEETFOOTED_MOVEMENT_BONUS = 2.0f;
+        private static readonly TextObject _textFleetfooted = new TextObject("{=1rOKUMTM}Fleetfooted");
 
         public override ExplainedNumber CalculateFinalSpeed(MobileParty mobileParty, ExplainedNumber finalSpeed)
         {
@@ -16,9 +16,9 @@ namespace FantasyTweaks.Models
 
             if (mobileParty.Party == PartyBase.MainParty)
             {
-                result.AddFactor(SHADOWFAX_MOVEMENT_BONUS, _textShadowFax);
+                result.AddFactor(FLEETFOOTED_MOVEMENT_BONUS, _textFleetfooted);
             }
-            
+
             result.LimitMin(1f);
             return result;
         }

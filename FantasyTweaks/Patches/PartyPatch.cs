@@ -17,6 +17,8 @@ namespace FantasyTweaks.Patches
         
         public static void Postfix(PartyBase party, bool includeDescriptions, ref ExplainedNumber __result)
         {
+            return;
+            /*
             if (!party.MobileParty.IsMainParty)
             {
                 return;
@@ -30,6 +32,7 @@ namespace FantasyTweaks.Patches
                 int bonus = Math.Max(leadershipSkill - _ultimateLeaderSkillCutOff, 0);
                 __result.Add(bonus, _textCustodianGuard);
             }
+            */
         }
     }
 }
