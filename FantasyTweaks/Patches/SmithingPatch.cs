@@ -4,6 +4,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Core;
 
 namespace FantasyTweaks.Patches
 {
@@ -11,7 +12,8 @@ namespace FantasyTweaks.Patches
     class DefaultSmithingModelPatch
     {
         private static readonly Double SMITHING_STAMINA_MULTIPLIER = 0.25;
-        private static readonly int RESEARCH_RATE_MULTIPLIER = 50;
+        private static readonly float RESEARCH_RATE_MULTIPLIER = 10f;
+        private static readonly int RESEARCH_GAIN_MULTIPLIER = 2;
 
         [HarmonyPostfix]
         [HarmonyPatch("GetEnergyCostForRefining")]
@@ -37,9 +39,23 @@ namespace FantasyTweaks.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("ResearchPointsNeedForNewPart")]
-        static void ResearchPointsNeedForNewPartPatch(int count, ref int __result)
+        static void ResearchPointsNeedForNewPartPatch(int totalPartCount, int openedPartCount, ref float __result)
         {
-            __result = __result / RESEARCH_RATE_MULTIPLIER;
+            __result = Math.Max(1f, __result / RESEARCH_RATE_MULTIPLIER);
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch("GetPartResearchGainForSmeltingItem")]
+        static void GetPartResearchGainForSmeltingItemPatch(ItemObject item, Hero hero, ref int __result)
+        {
+            __result *= RESEARCH_GAIN_MULTIPLIER;
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch("GetPartResearchGainForSmithingItem")]
+        static void GetPartResearchGainForSmithingItemPatch(ItemObject item, Hero hero, ref int __result)
+        {
+            __result *= RESEARCH_GAIN_MULTIPLIER;
         }
     }
 
